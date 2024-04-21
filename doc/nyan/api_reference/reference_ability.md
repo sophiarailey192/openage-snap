@@ -630,6 +630,7 @@ Lock pools definitions.
 Move(Ability):
     speed : float
     modes : set(MoveMode)
+    type  : children(MoveType)
 ```
 
 Allows a game entity to move around the map.
@@ -638,7 +639,10 @@ Allows a game entity to move around the map.
 Speed of movement.
 
 **modes**
-Type of movements that can be used.
+Modes of movements that can be used.
+
+**type**
+Movement type used for pathfinding.
 
 ## ability.type.Named
 

@@ -1431,6 +1431,24 @@ Standard(ModifierScope):
 
 Makes the modifier behave as if standard rules would apply, i.e. as if the modifier had no `Scoped` property.
 
+## util.move_cost.MoveCost
+
+```python
+MoveCost(Object):
+    type : MoveType
+    cost : int
+```
+
+Defines movement costs for passing through a terrain in the pathfinder.
+
+**type**
+Movement type.
+
+**cost**
+Cost of movement for the specified movement type.
+
+Must be a number between `1` and `255`, where `1` represents the *minimum* cost and `255` represents the *impassable* cost.
+
 ## util.move_mode.MoveMode
 
 ```python
@@ -1490,6 +1508,18 @@ Patrol(MoveMode):
 ```
 
 Lets player set two or more waypoints that the game entity will follow. Stances from `GameEntityStance` ability are considered during movement.
+
+## util.move_type.MoveType
+
+```python
+MoveType(Object):
+    pass
+```
+
+Movement type used by a `Move` ability.
+
+Every defined `MoveType` inheriting from this object is associated with a grid in the pathfinder. By assigning a specific `MoveType` to a `Move` ability, a game entity can find a path on the corresponding grid when using said ability. Movement costs are assigned per `Terrain` object via the `MoveCost` object.
+
 
 ## util.passable_mode.PassableMode
 
@@ -2413,6 +2443,7 @@ Terrain(Object):
     terrain_graphic : Terrain
     sound           : Sound
     ambience        : set(TerrainAmbient)
+    move_costs      : set(MoveCost)
 ```
 
 Terrains define the properties of the ground which the game entities are placed on.
@@ -2431,6 +2462,9 @@ Ambient sound played when the camera of the player is looking onto the terrain.
 
 **ambience**
 Ambient objects placed on the terrain.
+
+**move_costs**
+Movement costs (in the pathfinder) for game entities passing through the terrain.
 
 ## util.terrain.TerrainAmbient
 
