@@ -1,4 +1,4 @@
-// Copyright 2022-2023 the openage authors. See copying.md for legal info.
+// Copyright 2022-2024 the openage authors. See copying.md for legal info.
 
 #include "render_stage.h"
 
@@ -94,8 +94,6 @@ void WorldRenderStage::update() {
 		}
 		obj->update_uniforms(current_time);
 	}
-
-	std::cout << this->render_pass->renderables.size() << std::flush;
 }
 
 void WorldRenderStage::resize(size_t width, size_t height) {
