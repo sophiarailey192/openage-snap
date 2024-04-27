@@ -1936,16 +1936,15 @@ foundation_terrain : Terrain</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>5100</x>
-      <y>4310</y>
+      <y>4320</y>
       <w>220</w>
-      <h>100</h>
+      <h>80</h>
     </coordinates>
     <panel_attributes>*Pathable*
 bg=green
 
 --
 hitbox : Hitbox
-mode : PathableMode
 path_costs : dict(PathType, int)</panel_attributes>
     <additional_attributes/>
   </element>
@@ -4615,7 +4614,7 @@ ignore_containers : set(EntityContainer)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>5060</x>
-      <y>4340</y>
+      <y>4350</y>
       <w>60</w>
       <h>30</h>
     </coordinates>
