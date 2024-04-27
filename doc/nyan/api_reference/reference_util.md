@@ -1541,26 +1541,6 @@ The patch is applied to all players that have the specified diplomatic stances.
 **stances**
 Diplomatic stances of the players the patch should apply to.
 
-## util.path_cost.PathCost
-
-```python
-PathCost(Object):
-    type : PathType
-    cost : int
-```
-
-Defines pathing costs for movement of game entities utilizing the pathfinder. Used by `Terrain` objects to define the initial pathing cost of a game's map during map generation.
-
-**type**
-Path type.
-
-Corresponds to a pathfinding grid at runtime.
-
-**cost**
-Cost of traversing terrain for the specified path type.
-
-Must be a number between `1` and `255`. `1` defines the *minimum* possible cost and `254` represents the *maximum* possible cost. `255` signifies that the terrain is impassable for the specified path type.
-
 ## util.path_type.PathType
 
 ```python

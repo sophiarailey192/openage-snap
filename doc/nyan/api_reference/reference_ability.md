@@ -681,7 +681,7 @@ Terrain that is temporily replaces the existing map terrain.
 ```python
 Pathable(Ability):
     hitbox     : Hitbox
-    path_costs : dict(PathType, int)
+    path_costs : dict(children(PathType), int)
 ```
 
 Lets a game entity influence the pathing costs on the (static) pathfinding grid.
