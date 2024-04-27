@@ -243,7 +243,7 @@ types : set(TerrainType)
 terrain_graphic : Terrain
 sound : Sound
 ambience : set(TerrainAmbient)
-move_costs : set(MoveCost)</panel_attributes>
+path_costs : dict(PathType, int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -1938,14 +1938,15 @@ foundation_terrain : Terrain</panel_attributes>
       <x>5100</x>
       <y>4310</y>
       <w>220</w>
-      <h>90</h>
+      <h>100</h>
     </coordinates>
-    <panel_attributes>*Passable*
+    <panel_attributes>*Pathable*
 bg=green
 
 --
 hitbox : Hitbox
-mode : PassableMode</panel_attributes>
+mode : PathableMode
+path_costs : dict(PathType, int)</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -2018,11 +2019,11 @@ long_description : TranslatedMarkupFile</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>5100</x>
-      <y>4410</y>
-      <w>140</w>
+      <y>4420</y>
+      <w>220</w>
       <h>80</h>
     </coordinates>
-    <panel_attributes>*Hitbox*
+    <panel_attributes>*Collision*
 bg=green
 
 --
@@ -4526,7 +4527,7 @@ ignore_containers : set(EntityContainer)</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>5060</x>
-      <y>4440</y>
+      <y>4450</y>
       <w>60</w>
       <h>30</h>
     </coordinates>
@@ -5504,7 +5505,7 @@ blacklisted_entities : set(GameEntity)</panel_attributes>
       <w>230</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>openage nyan data API v0.4.1</panel_attributes>
+    <panel_attributes>openage nyan data API v0.5.0</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -7811,8 +7812,8 @@ bg=pink</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>5280</x>
-      <y>4410</y>
+      <x>5380</x>
+      <y>4420</y>
       <w>140</w>
       <h>100</h>
     </coordinates>
@@ -7828,101 +7829,13 @@ radius_z : float</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>5230</x>
-      <y>4440</y>
-      <w>70</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>50.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>5380</x>
-      <y>4310</y>
-      <w>320</w>
-      <h>90</h>
-    </coordinates>
-    <panel_attributes>*PassableMode*
-bg=pink
-
---
-allowed_types : set(GameEntityType)
-blacklisted_entities : set(GameEntity)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>5310</x>
-      <y>4340</y>
+      <y>4450</y>
       <w>90</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;.</panel_attributes>
     <additional_attributes>70.0;10.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>5600</x>
-      <y>4490</y>
-      <w>220</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>*Gate*
-bg=pink
-
---
-stances : set (DiplomaticStance)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>5600</x>
-      <y>4420</y>
-      <w>110</w>
-      <h>60</h>
-    </coordinates>
-    <panel_attributes>
-*Normal*
-bg=pink</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>5560</x>
-      <y>4390</y>
-      <w>30</w>
-      <h>150</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;130.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>5560</x>
-      <y>4440</y>
-      <w>60</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>5560</x>
-      <y>4510</y>
-      <w>60</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>lt=-</panel_attributes>
-    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
@@ -10622,7 +10535,7 @@ bg=pink</panel_attributes>
       <h>60</h>
     </coordinates>
     <panel_attributes>
-*MoveType*
+*PathType*
 bg=pink</panel_attributes>
     <additional_attributes/>
   </element>
@@ -10631,33 +10544,6 @@ bg=pink</panel_attributes>
     <coordinates>
       <x>4390</x>
       <y>3930</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1250</x>
-      <y>3900</y>
-      <w>140</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>*MoveCost*
-bg=pink
-
---
-type : MoveType
-cost : int</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1350</x>
-      <y>3850</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
