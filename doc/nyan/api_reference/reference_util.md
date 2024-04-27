@@ -1491,43 +1491,6 @@ Patrol(MoveMode):
 
 Lets player set two or more waypoints that the game entity will follow. Stances from `GameEntityStance` ability are considered during movement.
 
-## util.passable_mode.PassableMode
-
-```python
-PassableMode(Object):
-    allowed_types        : set(children(GameEntityType))
-    blacklisted_entities : set(GameEntity)
-```
-
-Generalization object for all passable modes. Define passability options for the `Passable` ability.
-
-**allowed_types**
-Lists the game entities types which can pass the hitbox.
-
-**blacklisted_entities**
-Used to blacklist game entities that have one of the types listed in `allowed_types`, but should not be covered by this `PassableMode` object.
-
-## util.passable_mode.type.Gate
-
-```python
-Gate(PassableMode):
-    stances : set(children(DiplomaticStance))
-```
-
-Lets all compatible game entities from players with the specified stances pass through the hitbox. Game entities of players with other stances can also pass through while any unit is passing through.
-
-**stances**
-Stances of players whose game entities are always allowed to pass though the hitbox.
-
-## util.passable_mode.type.Normal
-
-```python
-Normal(PassableMode):
-    pass
-```
-
-Lets all compatible game entities pass through the hitbox.
-
 ## util.patch.NyanPatch
 
 ```python
@@ -2463,7 +2426,7 @@ Ambient sound played when the camera of the player is looking onto the terrain.
 Ambient objects placed on the terrain.
 
 **path_costs**
-Base costs of traversing terrain.
+Base costs of traversing the pathfinding grid on map areas where the terrain is placed.
 
 Keys are `PathType` objects that are associated with a pathfinding grid in the pathfinder.
 

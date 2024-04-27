@@ -259,6 +259,18 @@ Container the target game entity will be inserted into. A `Storage` ability with
 **storage_elements**
 Game entities that can be inserted into the container. The container must allow the `GameEntity` objects.
 
+## ability.type.Collision
+
+```python
+Collision(Ability):
+    hitbox : Hitbox
+```
+
+Adds collision behaviour to a game entity.
+
+**hitbox**
+Defines the size (x, y, z) of the collision hitbox.
+
 ## ability.type.Constructable
 
 ```python
@@ -567,18 +579,6 @@ When other herdables are in this range around the herded game entity, they will 
 **mode**
 Determines who gets ownership of the herdable game entity when multiple game entities using `Herd` are in range.
 
-## ability.type.Hitbox
-
-```python
-Hitbox(Ability):
-    hitbox : Hitbox
-```
-
-Adds a hitbox to a game entity that is used for collision with other game entities.
-
-**hitbox**
-Defines the size (x, y, z) of the hitbox.
-
 ## ability.type.Idle
 
 ```python
@@ -676,21 +676,27 @@ Temporarily replace the map terrain the game entity is positioned on with a spec
 **terrain_overlay**
 Terrain that is temporily replaces the existing map terrain.
 
-## ability.type.Passable
+## ability.type.Pathable
 
 ```python
-Passable(Ability):
-    hitbox : Hitbox
-    mode   : PassableMode
+Pathable(Ability):
+    hitbox     : Hitbox
+    path_costs : dict(PathType, int)
 ```
 
-Deactivates a specified hitbox of the game entity for movement of other game entities. The hitbox is still relevant for the game entity's own movement.
+Lets a game entity influence the pathing costs on the (static) pathfinding grid.
+
+This ability should only be used for game entitie that never (or rarely) change positions as pathfinding grid recalculations are expensive. For dynamic pathfinding effects, using the `Collision` ability should be preferred.
 
 **hitbox**
-Reference to the hitbox that should be deactivated.
+Hitbox around the game entity that affects the underlying pathfinding grids. All grid cells that are covered by this hitbox ae influenced by the cost definitions in the `path_costs` attribute.
 
-**mode**
-Defines the game entities for which the hitbox is deactivated.
+**path_costs**
+Costs of traversing the area defined by the `hitbox` attribute on the pathfinding grid.
+
+Keys are `PathType` objects that are associated with a pathfinding grid in the pathfinder.
+
+Values represent the pathing cost for the terrain on the pathfinding grid. Each value must be an integer between `1` and `255`. `1` defines the *minimum* possible cost and `254` represents the *maximum* possible cost. `255` signifies that the terrain is impassable for the specified path type.
 
 ## ability.type.PassiveTransformTo
 
