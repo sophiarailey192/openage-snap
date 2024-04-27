@@ -1431,24 +1431,6 @@ Standard(ModifierScope):
 
 Makes the modifier behave as if standard rules would apply, i.e. as if the modifier had no `Scoped` property.
 
-## util.move_cost.MoveCost
-
-```python
-MoveCost(Object):
-    type : MoveType
-    cost : int
-```
-
-Defines movement costs for passing through a terrain in the pathfinder.
-
-**type**
-Movement type.
-
-**cost**
-Cost of movement for the specified movement type.
-
-Must be a number between `1` and `255`, where `1` represents the *minimum* cost and `255` represents the *impassable* cost.
-
 ## util.move_mode.MoveMode
 
 ```python
@@ -1508,18 +1490,6 @@ Patrol(MoveMode):
 ```
 
 Lets player set two or more waypoints that the game entity will follow. Stances from `GameEntityStance` ability are considered during movement.
-
-## util.move_type.MoveType
-
-```python
-MoveType(Object):
-    pass
-```
-
-Movement type used by a `Move` ability.
-
-Every defined `MoveType` inheriting from this object is associated with a grid in the pathfinder. By assigning a specific `MoveType` to a `Move` ability, a game entity can find a path on the corresponding grid when using said ability. Movement costs are assigned per `Terrain` object via the `MoveCost` object.
-
 
 ## util.passable_mode.PassableMode
 
@@ -1607,6 +1577,35 @@ The patch is applied to all players that have the specified diplomatic stances.
 
 **stances**
 Diplomatic stances of the players the patch should apply to.
+
+## util.path_cost.PathCost
+
+```python
+PathCost(Object):
+    type : PathType
+    cost : int
+```
+
+Defines pathing costs for movement of game entities utilizing the pathfinder. Used by `Terrain` objects to define the initial pathing cost of a game's map during map generation.
+
+**type**
+Path type.
+
+Corresponds to a pathfinding grid at runtime.
+
+**cost**
+Cost of traversing terrain for the specified path type.
+
+Must be a number between `1` and `255`. `1` defines the *minimum* possible cost and `254` represents the *maximum* possible cost. `255` signifies that the terrain is impassable for the specified path type.
+
+## util.path_type.PathType
+
+```python
+PathType(Object):
+    pass
+```
+
+Path type that is associated with an internal pathfinding grid at runtime.
 
 ## util.payment_mode.PaymentMode
 
@@ -2443,7 +2442,7 @@ Terrain(Object):
     terrain_graphic : Terrain
     sound           : Sound
     ambience        : set(TerrainAmbient)
-    move_costs      : set(MoveCost)
+    path_costs      : dict(children(PathType), int)
 ```
 
 Terrains define the properties of the ground which the game entities are placed on.
@@ -2463,8 +2462,14 @@ Ambient sound played when the camera of the player is looking onto the terrain.
 **ambience**
 Ambient objects placed on the terrain.
 
-**move_costs**
-Movement costs (in the pathfinder) for game entities passing through the terrain.
+**path_costs**
+Base costs of traversing terrain.
+
+Keys are `PathType` objects that are associated with a pathfinding grid in the pathfinder.
+
+Values represent the pathing cost for the terrain on the pathfinding grid. Each value must be an integer between `1` and `255`. `1` defines the *minimum* possible cost and `254` represents the *maximum* possible cost. `255` signifies that the terrain is impassable for the specified path type.
+
+For `PathType` objects that exist in the modpack but are not keys in this dict, a default cost value of `1` is assumed.
 
 ## util.terrain.TerrainAmbient
 

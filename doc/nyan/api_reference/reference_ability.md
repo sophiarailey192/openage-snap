@@ -628,9 +628,9 @@ Lock pools definitions.
 
 ```python
 Move(Ability):
-    speed : float
-    modes : set(MoveMode)
-    type  : children(MoveType)
+    speed      : float
+    modes      : set(MoveMode)
+    path_type  : children(PathType)
 ```
 
 Allows a game entity to move around the map.
@@ -641,8 +641,8 @@ Speed of movement.
 **modes**
 Modes of movements that can be used.
 
-**type**
-Movement type used for pathfinding.
+**path_type**
+Path type determining which pathfinding grid is searched to find a path from the start to the goal location.
 
 ## ability.type.Named
 
