@@ -396,7 +396,7 @@ bg=green
 --
 speed : float
 modes : set(MoveMode)
-type  : MoveType</panel_attributes>
+path_type : PathType</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
