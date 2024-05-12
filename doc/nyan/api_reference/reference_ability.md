@@ -676,28 +676,6 @@ Temporarily replace the map terrain the game entity is positioned on with a spec
 **terrain_overlay**
 Terrain that is temporily replaces the existing map terrain.
 
-## ability.type.Pathable
-
-```python
-Pathable(Ability):
-    hitbox     : Hitbox
-    path_costs : dict(children(PathType), int)
-```
-
-Lets a game entity influence the pathing costs on the (static) pathfinding grid.
-
-This ability should only be used for game entitie that never (or rarely) change positions as pathfinding grid recalculations are expensive. For dynamic pathfinding effects, using the `Collision` ability should be preferred.
-
-**hitbox**
-Hitbox around the game entity that affects the underlying pathfinding grids. All grid cells that are covered by this hitbox ae influenced by the cost definitions in the `path_costs` attribute.
-
-**path_costs**
-Costs of traversing the area defined by the `hitbox` attribute on the pathfinding grid.
-
-Keys are `PathType` objects that are associated with a pathfinding grid in the pathfinder.
-
-Values represent the pathing cost for the terrain on the pathfinding grid. Each value must be an integer between `1` and `255`. `1` defines the *minimum* possible cost and `254` represents the *maximum* possible cost. `255` signifies that the terrain is impassable for the specified path type.
-
 ## ability.type.PassiveTransformTo
 
 ```python
@@ -721,6 +699,28 @@ State change activated after `transform_time` has passed.
 
 **transform_progress**
 Can alter the game entity while the transformation is in progress. The objects in the set must have progress type `Transform`.
+
+## ability.type.Pathable
+
+```python
+Pathable(Ability):
+    hitbox     : Hitbox
+    path_costs : dict(children(PathType), int)
+```
+
+Lets a game entity influence the pathing costs on the (static) pathfinding grid.
+
+This ability should only be used for game entitie that never (or rarely) change positions as pathfinding grid recalculations are expensive. For dynamic pathfinding effects, using the `Collision` ability should be preferred.
+
+**hitbox**
+Hitbox around the game entity that affects the underlying pathfinding grids. All grid cells that are covered by this hitbox ae influenced by the cost definitions in the `path_costs` attribute.
+
+**path_costs**
+Costs of traversing the area defined by the `hitbox` attribute on the pathfinding grid.
+
+Keys are `PathType` objects that are associated with a pathfinding grid in the pathfinder.
+
+Values represent the pathing cost for the terrain on the pathfinding grid. Each value must be an integer between `1` and `255`. `1` defines the *minimum* possible cost and `254` represents the *maximum* possible cost. `255` signifies that the terrain is impassable for the specified path type.
 
 ## ability.type.ProductionQueue
 
